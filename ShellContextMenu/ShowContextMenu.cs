@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Drawing;
-using System.Windows.Forms;
 using System.IO;
-using System.Security.Permissions;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows.Forms;
 
 namespace Asjc.ShellContextMenu
 {
@@ -513,13 +511,13 @@ namespace Asjc.ShellContextMenu
                     this.Handle,
                     IntPtr.Zero);
 
-                DestroyMenu(pMenu);
-                pMenu = IntPtr.Zero;
-
                 if (nSelected != 0)
                 {
                     InvokeCommand(_oContextMenu, nSelected, _strParentFolder, pointScreen);
                 }
+
+                DestroyMenu(pMenu);
+                pMenu = IntPtr.Zero;
             }
             catch
             {
@@ -1561,10 +1559,11 @@ namespace Asjc.ShellContextMenu
         /// <returns>The unsigned integer for the High Word</returns>
         public static uint HiWord(IntPtr ptr)
         {
-            if (((uint)ptr & 0x80000000) == 0x80000000)
-                return ((uint)ptr >> 16);
+            uint param32 = (uint)(ptr.ToInt64() & 0xffffffffL);
+            if ((param32 & 0x80000000) == 0x80000000)
+                return (param32 >> 16);
             else
-                return ((uint)ptr >> 16) & 0xffff;
+                return (param32 >> 16) & 0xffff;
         }
 
         /// <summary>
@@ -1574,7 +1573,8 @@ namespace Asjc.ShellContextMenu
         /// <returns>The unsigned integer for the Low Word</returns>
         public static uint LoWord(IntPtr ptr)
         {
-            return (uint)ptr & 0xffff;
+            uint param32 = (uint)(ptr.ToInt64() & 0xffffffffL);
+            return (param32 & 0xffff);
         }
 
         #endregion
