@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShellContextMenu", "ShellContextMenu\ShellContextMenu.csproj", "{3A103DD2-C7F9-4299-9F3F-6CF0FBFE17BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShellContextMenu", "ShellContextMenu\ShellContextMenu.csproj", "{3A103DD2-C7F9-4299-9F3F-6CF0FBFE17BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShellContextMenu.Test", "ShellContextMenu.Test\ShellContextMenu.Test.csproj", "{71B28A05-C899-4AD6-BE10-0BDECCC18FE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShellContextMenu.Test", "ShellContextMenu.Test\ShellContextMenu.Test.csproj", "{DCD1F9DB-0FE8-4CF9-88BB-CD62744B895D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{3A103DD2-C7F9-4299-9F3F-6CF0FBFE17BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A103DD2-C7F9-4299-9F3F-6CF0FBFE17BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A103DD2-C7F9-4299-9F3F-6CF0FBFE17BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71B28A05-C899-4AD6-BE10-0BDECCC18FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71B28A05-C899-4AD6-BE10-0BDECCC18FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71B28A05-C899-4AD6-BE10-0BDECCC18FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71B28A05-C899-4AD6-BE10-0BDECCC18FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCD1F9DB-0FE8-4CF9-88BB-CD62744B895D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCD1F9DB-0FE8-4CF9-88BB-CD62744B895D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCD1F9DB-0FE8-4CF9-88BB-CD62744B895D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCD1F9DB-0FE8-4CF9-88BB-CD62744B895D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
