@@ -3,8 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <Version>1.0.0</Version>
+    <Authors>AlexSJC</Authors>
     <Description>Simply open the Shell Context Menu of Windows Explorer</Description>
+    <Copyright>Copyright © $(Authors) $([System.DateTime]::Now.Year)</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/SJC08/ShellContextMenu</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
