@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <Version>1.1.0</Version>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Version>1.0.0</Version>
     <Description>Simply open the Shell Context Menu of Windows Explorer</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/SJC08/ShellContextMenu</RepositoryUrl>
