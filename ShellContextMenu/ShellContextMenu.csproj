@@ -1,17 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>net8.0-windows;netcoreapp3.1;net48</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>AlexSJC</Authors>
-    <Description>Simply open the Shell Context Menu of Windows Explorer</Description>
+    <Description>Simply open the Shell Context Menu of Windows Explorer.</Description>
     <Copyright>Copyright © $(Authors) $([System.DateTime]::Now.Year)</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/SJC08/ShellContextMenu</RepositoryUrl>
+    <RepositoryUrl>https://github.com/sjc08/ShellContextMenu</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 

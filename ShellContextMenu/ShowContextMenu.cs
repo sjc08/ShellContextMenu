@@ -143,17 +143,19 @@ namespace Asjc.ShellContextMenu
         #region InvokeCommand
         private void InvokeCommand(IContextMenu oContextMenu, uint nCmd, string strFolder, Point pointInvoke)
         {
-            CMINVOKECOMMANDINFOEX invoke = new CMINVOKECOMMANDINFOEX();
-            invoke.cbSize = cbInvokeCommand;
-            invoke.lpVerb = (IntPtr)(nCmd - CMD_FIRST);
-            invoke.lpDirectory = strFolder;
-            invoke.lpVerbW = (IntPtr)(nCmd - CMD_FIRST);
-            invoke.lpDirectoryW = strFolder;
-            invoke.fMask = CMIC.UNICODE | CMIC.PTINVOKE |
+            CMINVOKECOMMANDINFOEX invoke = new()
+            {
+                cbSize = cbInvokeCommand,
+                lpVerb = (IntPtr)(nCmd - CMD_FIRST),
+                lpDirectory = strFolder,
+                lpVerbW = (IntPtr)(nCmd - CMD_FIRST),
+                lpDirectoryW = strFolder,
+                fMask = CMIC.UNICODE | CMIC.PTINVOKE |
                 ((Control.ModifierKeys & Keys.Control) != 0 ? CMIC.CONTROL_DOWN : 0) |
-                ((Control.ModifierKeys & Keys.Shift) != 0 ? CMIC.SHIFT_DOWN : 0);
-            invoke.ptInvoke = new POINT(pointInvoke.X, pointInvoke.Y);
-            invoke.nShow = SW.SHOWNORMAL;
+                ((Control.ModifierKeys & Keys.Shift) != 0 ? CMIC.SHIFT_DOWN : 0),
+                ptInvoke = new POINT(pointInvoke.X, pointInvoke.Y),
+                nShow = SW.SHOWNORMAL
+            };
 
             oContextMenu.InvokeCommand(ref invoke);
         }
@@ -251,7 +253,7 @@ namespace Asjc.ShellContextMenu
                 IntPtr pStrRet = Marshal.AllocCoTaskMem(MAX_PATH * 2 + 4);
                 Marshal.WriteInt32(pStrRet, 0, 0);
                 nResult = _oDesktopFolder.GetDisplayNameOf(pPIDL, SHGNO.FORPARSING, pStrRet);
-                StringBuilder strFolder = new StringBuilder(MAX_PATH);
+                StringBuilder strFolder = new(MAX_PATH);
                 StrRetToBuf(pStrRet, pPIDL, strFolder, MAX_PATH);
                 Marshal.FreeCoTaskMem(pStrRet);
                 pStrRet = IntPtr.Zero;
@@ -564,8 +566,8 @@ namespace Asjc.ShellContextMenu
         private const int S_OK = 0;
         private const int S_FALSE = 1;
 
-        private static int cbMenuItemInfo = Marshal.SizeOf(typeof(MENUITEMINFO));
-        private static int cbInvokeCommand = Marshal.SizeOf(typeof(CMINVOKECOMMANDINFOEX));
+        private static readonly int cbMenuItemInfo = Marshal.SizeOf(typeof(MENUITEMINFO));
+        private static readonly int cbInvokeCommand = Marshal.SizeOf(typeof(CMINVOKECOMMANDINFOEX));
 
         #endregion
 
@@ -599,10 +601,10 @@ namespace Asjc.ShellContextMenu
 
         #region Shell GUIDs
 
-        private static Guid IID_IShellFolder = new Guid("{000214E6-0000-0000-C000-000000000046}");
-        private static Guid IID_IContextMenu = new Guid("{000214e4-0000-0000-c000-000000000046}");
-        private static Guid IID_IContextMenu2 = new Guid("{000214f4-0000-0000-c000-000000000046}");
-        private static Guid IID_IContextMenu3 = new Guid("{bcfce0a0-ec17-11d0-8d10-00a0c90f2719}");
+        private static Guid IID_IShellFolder = new("{000214E6-0000-0000-C000-000000000046}");
+        private static Guid IID_IContextMenu = new("{000214e4-0000-0000-c000-000000000046}");
+        private static Guid IID_IContextMenu2 = new("{000214f4-0000-0000-c000-000000000046}");
+        private static Guid IID_IContextMenu3 = new("{bcfce0a0-ec17-11d0-8d10-00a0c90f2719}");
 
         #endregion
 
@@ -646,37 +648,21 @@ namespace Asjc.ShellContextMenu
 
         // Contains information about a menu item
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        private struct MENUITEMINFO
+        private struct MENUITEMINFO(string text)
         {
-            public MENUITEMINFO(string text)
-            {
-                cbSize = cbMenuItemInfo;
-                dwTypeData = text;
-                cch = text.Length;
-                fMask = 0;
-                fType = 0;
-                fState = 0;
-                wID = 0;
-                hSubMenu = IntPtr.Zero;
-                hbmpChecked = IntPtr.Zero;
-                hbmpUnchecked = IntPtr.Zero;
-                dwItemData = IntPtr.Zero;
-                hbmpItem = IntPtr.Zero;
-            }
-
-            public int cbSize;
-            public MIIM fMask;
-            public MFT fType;
-            public MFS fState;
-            public uint wID;
-            public IntPtr hSubMenu;
-            public IntPtr hbmpChecked;
-            public IntPtr hbmpUnchecked;
-            public IntPtr dwItemData;
+            public int cbSize = cbMenuItemInfo;
+            public MIIM fMask = 0;
+            public MFT fType = 0;
+            public MFS fState = 0;
+            public uint wID = 0;
+            public IntPtr hSubMenu = IntPtr.Zero;
+            public IntPtr hbmpChecked = IntPtr.Zero;
+            public IntPtr hbmpUnchecked = IntPtr.Zero;
+            public IntPtr dwItemData = IntPtr.Zero;
             [MarshalAs(UnmanagedType.LPTStr)]
-            public string dwTypeData;
-            public int cch;
-            public IntPtr hbmpItem;
+            public string dwTypeData = text;
+            public int cch = text.Length;
+            public IntPtr hbmpItem = IntPtr.Zero;
         }
 
         // A generalized global memory handle used for data transfer operations by the 
@@ -697,16 +683,10 @@ namespace Asjc.ShellContextMenu
 
         // Defines the x- and y-coordinates of a point
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        private struct POINT
+        private struct POINT(int x, int y)
         {
-            public POINT(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-            public int x;
-            public int y;
+            public int x = x;
+            public int y = y;
         }
 
         #endregion
@@ -1461,8 +1441,7 @@ namespace Asjc.ShellContextMenu
         public event HookEventHandler HookInvoked;
         protected void OnHookInvoked(HookEventArgs e)
         {
-            if (HookInvoked != null)
-                HookInvoked(this, e);
+            HookInvoked?.Invoke(this, e);
         }
         // ************************************************************************
 
@@ -1488,10 +1467,12 @@ namespace Asjc.ShellContextMenu
                 return CallNextHookEx(m_hhook, code, wParam, lParam);
 
             // Let clients determine what to do
-            HookEventArgs e = new HookEventArgs();
-            e.HookCode = code;
-            e.wParam = wParam;
-            e.lParam = lParam;
+            HookEventArgs e = new()
+            {
+                HookCode = code,
+                wParam = wParam,
+                lParam = lParam
+            };
             OnHookInvoked(e);
 
             // Yield to the next hook in the chain
